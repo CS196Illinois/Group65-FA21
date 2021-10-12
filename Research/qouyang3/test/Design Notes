@@ -1,0 +1,32 @@
+Intended users: students with supposed lecture video files
+
+Function: output summarized text transcript of uploaded lecture videos
+
+Potential impressions: allows for YouTube links, outputs summarized videos—we don't, for now; correct these
+
+Expectations: clean, paragraphed, indented text output (with timestamps?); options to output .txt file (and a shareable link?)
+
+accessibility settings: text-to-speech (either computer-generated audio, or if we're good enough, taking the actual words from lecture and truncate lol); color-blind friendly: avoid red/green (overwhelming color profile would be yellow, brown, and blue), further research needed; dark/light mode toggle; extreme: copy UI/UX for other site add-ons
+
+Home page: doubles as upload page
+
+- title: Lecture Videos —> Summarized Transcripts; subtitle: Speed-running recorded lectures not good enough for you? Go get a clean, readable summary of it instead!
+    - animations: fade in "lecture videos", typed-out summarized transcripts with flashing INS bar; "fast" animations to indicate speediness
+- X minutes of videos uploaded! X minutes of videos truncated! (offer a proportion?) X% transcription satisfaction rate!; feels a little clickbaity, lets temper it
+- Upload here! (notes: acceptable files, one file at a time, links not supported atm)
+    - loading bar for upload, then a "summarize!" button; clicking leads to result page
+- future testimonials LOL
+- FAQ:
+    - How are you able to summarize videos? We first get a full transcript of the video, then we use [...] to generate a text summary by condensing spoken phrases and omitting redundant content, etc.*
+    - What if I can't upload a file for my video summary? As of now, we only take video/audio files. Future support for links is under consideration. [this is a huge blocker, along with not providing a summarized video instead of just transcript]
+    - [probably a bunch more Qs but we are at very MVP-level so save for later]
+    
+
+Result page:
+
+- result page:
+    - clean text box for transcript; consider: options for font sizes, horizontal spacing, even self-editable
+    - stats for video: X minutes long, before vs. after transcript length, before vs. after of # of minutes to read
+    - export button to .txt (and .pdf?), maybe with the user-edited options (see above considerations)
+    - share button to a temp link? if above considerations, also editable per-link click
+    - short survey: video content (math, nat sciences, CS, humanities, etc.), quality of transcription, etc.; qualitative feedback textbox
