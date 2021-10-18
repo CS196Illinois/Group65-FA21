@@ -11,7 +11,6 @@ const element = (
 );
 
 ReactDOM.render(
-  element, 
   <React.StrictMode>
     <App />
   </React.StrictMode>,
