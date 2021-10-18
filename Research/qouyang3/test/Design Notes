@@ -1,16 +1,17 @@
-Intended users: students with supposed lecture video files
+Intended users: students with lecture video files
 
 Function: output summarized text transcript of uploaded lecture videos
 
-Potential impressions: allows for YouTube links, outputs summarized videos—we don't, for now; correct these
+Potential (incorrect) impressions: processes for YouTube (or any) links, processes text/image files, outputs summarized videos, ; correct these or consider for future implementations; consider allowing for transcript uploads (either use directly or cross-compare with generated transcript to get a potentially more accurate version)
 
-Expectations: clean, paragraphed, indented text output (with timestamps?); options to output .txt file (and a shareable link?)
+Expectations: clean, paragraphed, indented text output (with timestamps?); options to output .txt file (and a shareable link?); 
+"level" of summarization can be controlled by a slider or constrained by a user-input parameter (Ex. max. # of minutes, skip examples--will we be at that capability?)
 
-accessibility settings: text-to-speech (either computer-generated audio, or if we're good enough, taking the actual words from lecture and truncate lol); color-blind friendly: avoid red/green (overwhelming color profile would be yellow, brown, and blue), further research needed; dark/light mode toggle; extreme: copy UI/UX for other site add-ons
+accessibility settings: text-to-speech (either computer-generated audio or spliced from original lecture audio without sounding choppy); color-blind friendly: avoid red/green (overwhelming color profile would be yellow, brown, and blue), further research needed; dark/light mode toggle; extreme: copy UI/UX from other site add-ons for accessibility menus
 
-Home page: doubles as upload page
+Home page: doubles as upload page...for now? compact but potentially incohesive
 
-- title: Lecture Videos —> Summarized Transcripts; subtitle: Speed-running recorded lectures not good enough for you? Go get a clean, readable summary of it instead!
+- title: Lecture Videos —> Summarized Transcripts (or: Lecture Videos: Summarized.); subtitle: Speed-running recorded lectures not good enough for you? Go get a clean, readable summary of it instead!
     - animations: fade in "lecture videos", typed-out summarized transcripts with flashing INS bar; "fast" animations to indicate speediness
 - X minutes of videos uploaded! X minutes of videos truncated! (offer a proportion?) X% transcription satisfaction rate!; feels a little clickbaity, lets temper it
 - Upload here! (notes: acceptable files, one file at a time, links not supported atm)
@@ -24,9 +25,10 @@ Home page: doubles as upload page
 
 Result page:
 
-- result page:
-    - clean text box for transcript; consider: options for font sizes, horizontal spacing, even self-editable
-    - stats for video: X minutes long, before vs. after transcript length, before vs. after of # of minutes to read
-    - export button to .txt (and .pdf?), maybe with the user-edited options (see above considerations)
+- result page, *prioritized features:
+    - *paragraphed text
+    - clean text box for transcript, show time stamps toggle?; consider: options for font sizes, horizontal spacing, even self-editable
+    - *stats for video: X minutes long, before vs. after transcript length, before vs. after of # of minutes to read
+    - *export button to .txt (and .pdf?), maybe with the user-edited options (see above considerations)
     - share button to a temp link? if above considerations, also editable per-link click
     - short survey: video content (math, nat sciences, CS, humanities, etc.), quality of transcription, etc.; qualitative feedback textbox
