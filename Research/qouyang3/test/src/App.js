@@ -1,9 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 
+const element = (
+  <h1 className="greeting">
+    Hello, world!
+  </h1>
+);
+
 function App() {
   return (
     <div className="App">
+      {element}
       <header className="App-header">
         <p>
           Edit <code>src/App.js</code> and save to reload.

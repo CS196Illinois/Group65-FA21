@@ -15,7 +15,15 @@ function homepageTest() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn Reactaaa
+        </a>
+        <a
+          className="App-link"
+          href="https://google.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn asdjalkdjs
         </a>
       </header>
     </div>
