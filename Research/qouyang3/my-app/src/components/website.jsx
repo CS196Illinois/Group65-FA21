@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 
 class website extends React.Component {
   render() {
@@ -18,7 +18,7 @@ class website extends React.Component {
           Speed-running recorded lectures not good enough for you? Get a clean,
           readable summary of it instead!
         </h3>
-        <button className="btn m-4 btn-primary btn-sm">Upload</button>
+        <button className="btn m-4 btn-primary btn-lg">Upload</button>
         <p style={centering}>X minutes of videos uploaded!</p>
         <p style={centering}>X minutes of words removed!</p>
         <p style={centering}>X% summary satisfaction rate!</p>
