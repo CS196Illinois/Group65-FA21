@@ -3,10 +3,7 @@ import speech_recognition as sr
 import moviepy.editor
 from pydub import AudioSegment
 from flask import Flask
-from ibm_watson import SpeechToTextV1
-from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-import subprocess
-import os
+import pyttsx3
 
 
 app = Flask(__name__)
@@ -23,9 +20,9 @@ def transcribevideo(filename):
     getRecognizer = sr.Recognizer()
 
     with sr.AudioFile(audiofile) as source:
-        getRecognizer.adjust_for_ambient_noise(source)
+
         print("Converting Audio File to Text------")
-        audio = getRecognizer.record(source, 60)
+        audio = getRecognizer.record(source)
 
         try:
             print("Converted Audio is :" + getRecognizer.recognize_google(audio))
