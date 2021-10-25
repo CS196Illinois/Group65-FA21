@@ -1,27 +1,38 @@
 from moviepy.config import try_cmd
 import speech_recognition as sr
 import moviepy.editor
-video = moviepy.editor.VideoFileClip('file.mp4')
-au = video.audio
-str = "file.wav"
-aa = au.write_audiofile(str)
+from pydub import AudioSegment
+from flask import Flask
+from ibm_watson import SpeechToTextV1
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+import subprocess
+import os
 
 
-def main():
-    sound = str
-    r = sr.Recognizer()
+app = Flask(__name__)
 
-    with sr.AudioFile(sound) as source:
-        r. adjust_for_ambient_noise(source)
+
+@app.route("/transcribe/<filename>")
+def transcribevideo(filename):
+
+    video = moviepy.editor.VideoFileClip(filename)
+    receiveaudio = video.audio
+    audiofile = filename[0:-4] + ".wav"
+    receiveaudio.write_audiofile(audiofile)
+
+    getRecognizer = sr.Recognizer()
+
+    with sr.AudioFile(audiofile) as source:
+        getRecognizer.adjust_for_ambient_noise(source)
         print("Converting Audio File to Text------")
-        audio = r.record(source)
+        audio = getRecognizer.record(source, 60)
 
         try:
-            print("Converted Audio is " + r.recognize_google(audio))
+            print("Converted Audio is :" + getRecognizer.recognize_google(audio))
 
         except Exception as e:
             print(e)
 
 
 if __name__ == "__main__":
-    main()
+    transcribevideo(filename="file.mp4")
