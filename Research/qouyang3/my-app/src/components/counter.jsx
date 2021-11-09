@@ -28,7 +28,7 @@ class Counter extends React.Component {
   //handleIncrement = (product) => {
   handleIncrement = () => {
     //  console.log(product);
-    this.setState({ value: this.state.value + 1 });
+    this.setState({ value: this.state.value * 2 + 1 });
   };
 
   getBadgeClasses() {
