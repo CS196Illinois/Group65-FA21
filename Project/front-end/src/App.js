@@ -44,7 +44,7 @@ const styleStats = {
   fontSize: 24,
 };
 
-export default function Website() {
+export default function App() {
   return (
     <div style={centering}>
       <div style={sideBySideContainer}>
