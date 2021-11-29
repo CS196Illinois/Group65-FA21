@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "./figure.svg";
 
 const sideBySideContainer = {
@@ -43,8 +43,6 @@ const styleStats = {
 };
 
 export default function Home() {
-  const navigate = useNavigate();
-  const handleClick = () => navigate("/test");
   return (
     <div style={centering}>
       <div style={sideBySideContainer}>
@@ -60,9 +58,9 @@ export default function Home() {
         </div>
         <Logo />
       </div>
-      <button type="button" onClick={handleClick}>
-        Goodbye
-      </button>
+      <Link to="/Test">
+        <button type="button">test page</button>
+      </Link>
       <button className="btn m-4 btn-primary btn-lg">Upload</button>
       <p style={styleStats}>X minutes of videos uploaded!</p>
       <p style={styleStats}>X minutes of words removed!</p>

@@ -1,28 +1,23 @@
 import React from "react";
-import { render } from "react-dom";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useRoutes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Test from "./Test";
 
-const App = () => {
-  let routes = useRoutes([
-    { path: "/", element: <Home /> },
-    { path: "test", element: <Test /> },
-  ]);
-  return routes;
-};
+// const App = () => {
+//   let routes = useRoutes([
+//     { path: "/", element: <Home /> },
+//     { path: "test", element: <Test /> },
+//   ]);
+//   return routes;
+// };
 
-const AppWrapper = () => {
+export default function AppWrapper() {
   return (
     <Router>
-      <App />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Test" element={<Test />} />
+      </Routes>
     </Router>
   );
-};
-
-render(<AppWrapper />, document.getElementById("root"));
+}
