@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as HomeImage } from "./figure.svg";
+import "./custom.css";
 
 // const sideBySideContainer = {
 //   display: "flex",

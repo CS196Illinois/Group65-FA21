@@ -4,3 +4,9 @@
 .form-control {
   border-radius: 0;
 }
+
+.styleTitle1 {
+  font-size: 72;
+  padding-top: "100px";
+  font-weight: "bold";
+}
