@@ -1,6 +1,6 @@
 import speech_recognition as sr
 
-filename = "audio.mp3"
+filename = "sunny.wav"
 r = sr.Recognizer()
 
 with sr.AudioFile(filename) as source:
