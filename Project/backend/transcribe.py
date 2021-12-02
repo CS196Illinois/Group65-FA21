@@ -1,11 +1,9 @@
 from moviepy.config import try_cmd
 import speech_recognition as sr
+
 import moviepy.editor
-from pydub import AudioSegment
+
 from flask import Flask
-import pyttsx3
-
-
 app = Flask(__name__)
 
 
