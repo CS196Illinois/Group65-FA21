@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home2";
 import Test from "./Test";
 
-export default function AppWrapper() {
+export default function App() {
   return (
     <Router>
       <Routes>
