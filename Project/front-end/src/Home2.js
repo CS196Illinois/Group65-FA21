@@ -3,39 +3,22 @@ import { Link } from "react-router-dom";
 import { ReactComponent as HomeImage } from "./figure.svg";
 // import "./custom.css";
 
-const sideBySideContainer = {
-  display: "flex",
-};
-
 const titleStyle = {
   fontSize: 72,
   fontWeight: "bold",
 };
 
-const styleSubtitle = {
-  fontSize: 24,
-  textAlign: "right",
-};
+// const centering = {
+//   textAlign: "center",
+//   height: "100%",
+//   position: "relative",
+//   // minHeight: "100vh",
+//   display: "flex",
+//   flexDirection: "column",
+//   alignItems: "center",
+//   justifyContent: "center",
+// };
 
-const centering = {
-  textAlign: "center",
-  height: "100%",
-  position: "relative",
-  // minHeight: "100vh",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-};
-
-const right = {
-  textAlign: "right",
-  paddingRight: "50px",
-};
-
-const styleStats = {
-  fontSize: 24,
-};
 const Title = () => {
   return (
     <div style={{ paddingTop: 100 }}>
