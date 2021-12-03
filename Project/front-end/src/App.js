@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home2";
 import Test from "./Test";
-
+<!-- hi -->
 export default function AppWrapper() {
   return (
     <Router>
