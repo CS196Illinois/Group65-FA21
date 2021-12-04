@@ -1,42 +1,6 @@
 from moviepy.config import try_cmd
-<<<<<<< HEAD
-import moviepy.editor
-<<<<<<< HEAD
-"""from moviepy.config import try_cmd
-import moviepy.editor
-import speech_recognition as s
-from flask import Flask
-=======
-import speech_recognition as sr
->>>>>>> parent of aec01c2d (update)
 
 import moviepy.editor
-
-from flask import Flask
-app = Flask(__name__)
-
-
-@app.route("/transcribe/<filename>")
-def transcribevideo(filename):
-
-    video = moviepy.editor.VideoFileClip(filename)
-    receiveaudio = video.audio
-    audiofile = filename[0:-4] + ".wav"
-    receiveaudio.write_audiofile(audiofile)
-
-    getRecognizer = sr.Recognizer()
-
-<<<<<<< HEAD
-    with s.AudioFile(audiofile) as source:
-        getRecognizer.adjust_for_ambient_noise(source)
-=======
-    with sr.AudioFile(audiofile) as source:
->>>>>>> parent of aec01c2d (update)
-
-        print("Converting Audio File to Text------")
-        audio = getRecognizer.record(source)
-=======
->>>>>>> parent of 3049d774 (Implemented Audio Transcription)
 
 # importing libraries
 import speech_recognition as sr
@@ -96,14 +60,6 @@ def transcribevideo(path):
                 whole_text += text
     # return the text for all chunks detected
     return whole_text
-<<<<<<< HEAD
 
 
-<<<<<<< HEAD
 print(transcribevideo(path="video.mp4"))
-=======
-if __name__ == "__main__":
-    transcribevideo(filename="file.mp4")
->>>>>>> parent of aec01c2d (update)
-=======
->>>>>>> parent of 3049d774 (Implemented Audio Transcription)
