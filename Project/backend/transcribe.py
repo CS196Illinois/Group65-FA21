@@ -56,10 +56,6 @@ def transcribevideo(path):
                 print("Error:", str(e))
             else:
                 text = f"{text.capitalize()}. "
-
                 whole_text += text
     # return the text for all chunks detected
     return whole_text
-
-
-print(transcribevideo(path="video.mp4"))
