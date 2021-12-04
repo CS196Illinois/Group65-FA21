@@ -6,7 +6,7 @@ export default function Test() {
     <div>
       <h1>YOU DID ITTTT</h1>;
       <Link to="/Home2">
-        <button className="btn m-4 btn-primary btn-lg">test page</button>
+        <button className="btn m-4 btn-primary btn-lg">home page</button>
       </Link>
     </div>
   );
