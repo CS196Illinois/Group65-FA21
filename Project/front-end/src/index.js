@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import AppWrapper from "./App";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./custom.css";
+import App from "./App";
+import "bootstrap/dist/css/bootstrap.css";
 
-ReactDOM.render(<AppWrapper />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
