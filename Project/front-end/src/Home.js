@@ -47,17 +47,34 @@ export default function Home() {
 
   function handleUpload(event) {
     setFile(event.target.files[0]);
-    console.dir(file);
     const reader = new FileReader();
-    // reader.readAsText(file);
     reader.onload = function (e) {
       setFileContent(e.target.result);
+      console.log(e.target.result);
     };
     reader.readAsDataURL(event.target.files[0]);
-    console.log(fileContent);
     // localStorage.setItem()
     // Add code here to upload file to server
   }
+
+  // function previewFile() {
+  //   const preview = document.querySelector("img");
+  //   const file = document.querySelector("input[type=file]").files[0];
+  //   const reader = new FileReader();
+
+  //   reader.addEventListener(
+  //     "load",
+  //     function () {
+  //       // convert image file to base64 string
+  //       preview.src = reader.result;
+  //     },
+  //     false
+  //   );
+
+  //   if (file) {
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
 
   return (
     <div>
