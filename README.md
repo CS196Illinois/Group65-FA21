@@ -6,3 +6,5 @@ Group Name: :^)
 Team Members: varunm3, yqiu30, vanjani3, qouyang3
 
 Project Manager: yiliang6
+
+An application that takes lecture videos and outputs summarized transcripts
