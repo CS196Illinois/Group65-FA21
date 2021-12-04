@@ -1,9 +1,10 @@
+
 from moviepy.config import try_cmd
-import speech_recognition as sr
-
 import moviepy.editor
-
+import speech_recognition as s
 from flask import Flask
+
+
 app = Flask(__name__)
 
 
@@ -15,9 +16,9 @@ def transcribevideo(filename):
     audiofile = filename[0:-4] + ".wav"
     receiveaudio.write_audiofile(audiofile)
 
-    getRecognizer = sr.Recognizer()
+    getRecognizer = s.Recognizer()
 
-    with sr.AudioFile(audiofile) as source:
+    with s.AudioFile(audiofile) as source:
 
         print("Converting Audio File to Text------")
         audio = getRecognizer.record(source)
@@ -30,4 +31,4 @@ def transcribevideo(filename):
 
 
 if __name__ == "__main__":
-    transcribevideo(filename="file.mp4")
+    transcribevideo(filename="d.mp4")
