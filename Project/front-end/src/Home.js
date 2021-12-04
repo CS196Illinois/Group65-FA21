@@ -1,70 +1,110 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as Logo } from "./figure.svg";
+import { ReactComponent as HomeImage } from "./figure.svg";
+import { Form } from "react-bootstrap";
 
-const sideBySideContainer = {
-  display: "flex",
-};
-
-const styleTitle1 = {
+const titleStyle = {
   fontSize: 72,
-  paddingTop: "100px",
   fontWeight: "bold",
 };
-const styleTitle2 = {
-  fontSize: 72,
-  paddingTop: "0px",
-  fontWeight: "bold",
-  fontStyle: "italic",
-};
-const styleSubtitle = {
-  fontSize: 24,
-  textAlign: "right",
+
+const Title = () => {
+  return (
+    <div style={{ paddingTop: 100 }}>
+      <h1 style={titleStyle}>Lecture Videos...</h1>
+      <h1 style={{ ...titleStyle, ...{ fontStyle: "italic" } }}>Summarized.</h1>
+    </div>
+  );
 };
 
-const centering = {
-  textAlign: "center",
-  height: "100%",
-  position: "relative",
-  minHeight: "100vh",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
+const Subtitles = () => {
+  return (
+    <div style={{ textAlign: "right" }} className="text-muted">
+      <h3>Can’t understand your lectures at ×2 speed?</h3>
+      <h3>Get a short and readable transcript instead!</h3>
+    </div>
+  );
 };
 
-const right = {
-  textAlign: "right",
-  paddingRight: "50px",
-};
-
-const styleStats = {
-  fontSize: 24,
+const Statistics = (props) => {
+  const { minutesUploaded, wordsRemoved, percentSatisfied } = props;
+  return (
+    <div style={{ textAlign: "center" }}>
+      <h3>{minutesUploaded} minutes of videos uploaded!</h3>
+      <h3>{wordsRemoved} words removed!</h3>
+      <h3>{percentSatisfied}% satisfaction rate!</h3>
+    </div>
+  );
 };
 
 export default function Home() {
+  const minutesUploaded = 0;
+  const wordsRemoved = 0;
+  const percentSatisfied = 0;
+
+  const [file, setFile] = React.useState("");
+  const [fileContent, setFileContent] = React.useState("");
+
+  function handleUpload(event) {
+    setFile(event.target.files[0]);
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      setFileContent(e.target.result);
+      console.log(e.target.result);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+    // localStorage.setItem()
+    // Add code here to upload file to server
+  }
+
+  // function previewFile() {
+  //   const preview = document.querySelector("img");
+  //   const file = document.querySelector("input[type=file]").files[0];
+  //   const reader = new FileReader();
+
+  //   reader.addEventListener(
+  //     "load",
+  //     function () {
+  //       // convert image file to base64 string
+  //       preview.src = reader.result;
+  //     },
+  //     false
+  //   );
+
+  //   if (file) {
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
+
   return (
-    <div style={centering}>
-      <div style={sideBySideContainer}>
-        <div style={right}>
-          <h1 style={styleTitle1}>Lecture Videos...</h1>
-          <h1 style={styleTitle2}>Summarized.</h1>
-          <h3 style={styleSubtitle}>
-            Can’t understand your lectures at ×2 speed?
-          </h3>
-          <h3 style={styleSubtitle}>
-            Get a shorter and readable transcript instead!
-          </h3>
+    <div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ paddingRight: 50, textAlign: "right" }}>
+          <Title />
+          <Subtitles />
+          <Link to="/Result">
+            <button className="btn m-4 btn-primary btn-lg">Result Page</button>
+          </Link>
+          <Form.Group controlId="formFileLg" className="mb-3">
+            <Form.Control
+              type="file"
+              accept=".mp3., .wav, .flac, .aac, .mp4, .mov, .avi, .pdf, .txt"
+              size="lg"
+              onChange={handleUpload}
+            />
+            <p>Filename: {file.name}</p>
+            <p>File type: {file.type}</p>
+            <p>File size: {file.size} bytes</p>
+          </Form.Group>
+          <button className="btn m-4 btn-primary btn-lg">Summscribe!</button>
         </div>
-        <Logo />
+        <HomeImage style={{ paddingTop: 100 }} />
       </div>
-      <Link to="/Test">
-        <button type="button">test page</button>
-      </Link>
-      <button className="btn m-4 btn-primary btn-lg">Upload</button>
-      <p style={styleStats}>X minutes of videos uploaded!</p>
-      <p style={styleStats}>X minutes of words removed!</p>
-      <p style={styleStats}>X% summary satisfaction rate!</p>
+      <Statistics
+        minutesUploaded={minutesUploaded}
+        wordsRemoved={wordsRemoved}
+        percentSatisfied={percentSatisfied}
+      />
     </div>
   );
 }
