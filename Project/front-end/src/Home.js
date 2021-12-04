@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as HomeImage } from "./figure.svg";
 import { Form } from "react-bootstrap";
+import axios from "axios";
 
 const titleStyle = {
   fontSize: 72,
@@ -44,6 +45,13 @@ export default function Home() {
 
   const [file, setFile] = React.useState("");
   const [fileContent, setFileContent] = React.useState("");
+  const [resultData, setResultData] = React.useState("");
+
+  useEffect(() => {
+    fetch("/api")
+      .then((response) => response.json())
+      .then((data) => setResultData(data));
+  }, []);
 
   function handleUpload(event) {
     setFile(event.target.files[0]);
@@ -53,28 +61,18 @@ export default function Home() {
       console.log(e.target.result);
     };
     reader.readAsDataURL(event.target.files[0]);
-    // localStorage.setItem()
     // Add code here to upload file to server
   }
 
-  // function previewFile() {
-  //   const preview = document.querySelector("img");
-  //   const file = document.querySelector("input[type=file]").files[0];
-  //   const reader = new FileReader();
-
-  //   reader.addEventListener(
-  //     "load",
-  //     function () {
-  //       // convert image file to base64 string
-  //       preview.src = reader.result;
-  //     },
-  //     false
-  //   );
-
-  //   if (file) {
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
+  function uploadFile(event) {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append(file.name, file);
+    axios
+      .post("/api/upload", formData)
+      .then((res) => console.log(res))
+      .catch((err) => console.warn(err));
+  }
 
   return (
     <div>
@@ -82,9 +80,6 @@ export default function Home() {
         <div style={{ paddingRight: 50, textAlign: "right" }}>
           <Title />
           <Subtitles />
-          <Link to="/Result">
-            <button className="btn m-4 btn-primary btn-lg">Result Page</button>
-          </Link>
           <Form.Group controlId="formFileLg" className="mb-3">
             <Form.Control
               type="file"
@@ -92,14 +87,19 @@ export default function Home() {
               size="lg"
               onChange={handleUpload}
             />
-            <p>Filename: {file.name}</p>
+            {/* <p>Filename: {file.name}</p>
             <p>File type: {file.type}</p>
-            <p>File size: {file.size} bytes</p>
+            <p>File size: {file.size} bytes</p> */}
           </Form.Group>
-          <button className="btn m-4 btn-primary btn-lg">Summscribe!</button>
+          <button className="btn m-4 btn-primary btn-lg" onClick={uploadFile}>
+            Upload
+          </button>
         </div>
         <HomeImage style={{ paddingTop: 100 }} />
       </div>
+      <Link to="/Result">
+        <button className="btn m-4 btn-primary btn-lg">Result Page</button>
+      </Link>
       <Statistics
         minutesUploaded={minutesUploaded}
         wordsRemoved={wordsRemoved}
