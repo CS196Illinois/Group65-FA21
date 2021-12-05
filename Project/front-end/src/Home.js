@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { ReactComponent as HomeImage } from "./figure.svg";
 import { Form } from "react-bootstrap";
-import axios from "axios";
 
 const titleStyle = {
   fontSize: 72,
@@ -13,7 +11,7 @@ const Title = () => {
   return (
     <div style={{ paddingTop: 100 }}>
       <h1 style={titleStyle}>Lecture Videos...</h1>
-      <h1 style={{ ...titleStyle, ...{ fontStyle: "italic" } }}>Summarized.</h1>
+      <h1 style={{ ...titleStyle, fontStyle: "italic" }}>Summarized.</h1>
     </div>
   );
 };
@@ -43,35 +41,25 @@ export default function Home() {
   const wordsRemoved = 0;
   const percentSatisfied = 0;
 
-  const [file, setFile] = React.useState("");
-  const [fileContent, setFileContent] = React.useState("");
+  const [file, setFile] = React.useState(null);
   const [resultData, setResultData] = React.useState("");
-
-  useEffect(() => {
-    fetch("/api")
-      .then((response) => response.json())
-      .then((data) => setResultData(data));
-  }, []);
+  const [summary, setSummary] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
   function handleUpload(event) {
     setFile(event.target.files[0]);
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      setFileContent(e.target.result);
-      console.log(e.target.result);
-    };
-    reader.readAsDataURL(event.target.files[0]);
-    // Add code here to upload file to server
   }
 
   function uploadFile(event) {
+    setIsLoading(true);
     event.preventDefault();
-    const formData = new FormData();
-    formData.append(file.name, file);
-    axios
-      .post("/api/upload", formData)
-      .then((res) => console.log(res))
-      .catch((err) => console.warn(err));
+    fetch(`http://127.0.0.1:3002/transcribe/${file.name}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setResultData(data.transcript);
+        setSummary(data.summary);
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -87,19 +75,21 @@ export default function Home() {
               size="lg"
               onChange={handleUpload}
             />
-            {/* <p>Filename: {file.name}</p>
-            <p>File type: {file.type}</p>
-            <p>File size: {file.size} bytes</p> */}
           </Form.Group>
           <button className="btn m-4 btn-primary btn-lg" onClick={uploadFile}>
             Upload
           </button>
+          {isLoading ? (
+            <>
+              <div className="spinner-border text-primary" role="status" />
+              <h4>loading...</h4>
+            </>
+          ) : null}
         </div>
         <HomeImage style={{ paddingTop: 100 }} />
       </div>
-      <Link to="/Result">
-        <button className="btn m-4 btn-primary btn-lg">Result Page</button>
-      </Link>
+      <p style={{ padding: "50px" }}>{resultData}</p>
+      <p style={{ padding: "50px" }}>{summary}</p>
       <Statistics
         minutesUploaded={minutesUploaded}
         wordsRemoved={wordsRemoved}
