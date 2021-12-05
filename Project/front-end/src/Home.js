@@ -46,7 +46,7 @@ export default function Home() {
   const [summary, setSummary] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
-  function handleUpload(event) {
+  function chooseFile(event) {
     setFile(event.target.files[0]);
   }
 
@@ -73,7 +73,7 @@ export default function Home() {
               type="file"
               accept=".mp3., .wav, .flac, .aac, .mp4, .mov, .avi, .pdf, .txt"
               size="lg"
-              onChange={handleUpload}
+              onChange={chooseFile}
             />
           </Form.Group>
           <button className="btn m-4 btn-primary btn-lg" onClick={uploadFile}>
