@@ -11,12 +11,12 @@ cors = CORS(app)
 @app.route("/transcribe/<file>")
 def transcribe(file):
     transcript  = transcribevideo(file)
-    print("TRANSCRIPT:",transcript)
+    print("Transciption - Done.")
     data = {
         "transcript": transcript,
         "summary": summarize(transcript)
     }
-    print("SUMMARY:",data["summary"])
+    print("Summary - Done.")
     return json.dumps(data)
 
 if __name__ == "__main__":
