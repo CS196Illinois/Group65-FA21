@@ -1,6 +1,7 @@
 import React from "react";
 import { ReactComponent as HomeImage } from "./figure.svg";
 import { Form } from "react-bootstrap";
+import Footer from "./Footer";
 
 const titleStyle = {
   fontSize: 72,
@@ -25,50 +26,45 @@ const Subtitles = () => {
   );
 };
 
-const Statistics = (props) => {
-  const { minutesUploaded, wordsRemoved, percentSatisfied } = props;
-  return (
-    <div style={{ textAlign: "center" }}>
-      <h3>{minutesUploaded} minutes of videos uploaded!</h3>
-      <h3>{wordsRemoved} words removed!</h3>
-      <h3>{percentSatisfied}% satisfaction rate!</h3>
-    </div>
-  );
-};
-
 export default function Home() {
-  const minutesUploaded = 0;
-  const wordsRemoved = 0;
-  const percentSatisfied = 0;
-
   const [file, setFile] = React.useState(null);
   const [resultData, setResultData] = React.useState("");
   const [summary, setSummary] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
+  const [hasLoaded, setHasLoaded] = React.useState(false);
 
   function chooseFile(event) {
     setFile(event.target.files[0]);
   }
 
   function uploadFile(event) {
-    setIsLoading(true);
-    event.preventDefault();
-    fetch(`http://127.0.0.1:3002/transcribe/${file.name}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setResultData(data.transcript);
-        setSummary(data.summary);
-        setIsLoading(false);
-      });
+    console.log(file);
+    if (file === null) alert("No File Chosen.");
+    else {
+      setIsLoading(true);
+      event.preventDefault();
+      fetch(`http://127.0.0.1:3002/transcribe/${file.name}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setResultData(data.transcript);
+          setSummary(data.summary);
+          setIsLoading(false);
+          setHasLoaded(true);
+        });
+    }
   }
 
   return (
-    <div>
+    <>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div style={{ paddingRight: 50, textAlign: "right" }}>
           <Title />
           <Subtitles />
-          <Form.Group controlId="formFileLg" className="mb-3">
+          <Form.Group
+            controlId="formFileLg"
+            className="mb-3"
+            style={{ paddingTop: "25px" }}
+          >
             <Form.Control
               type="file"
               accept=".mp3., .wav, .flac, .aac, .mp4, .mov, .avi, .pdf, .txt"
@@ -88,13 +84,21 @@ export default function Home() {
         </div>
         <HomeImage style={{ paddingTop: 100 }} />
       </div>
-      <p style={{ padding: "50px" }}>{resultData}</p>
-      <p style={{ padding: "50px" }}>{summary}</p>
-      <Statistics
-        minutesUploaded={minutesUploaded}
-        wordsRemoved={wordsRemoved}
-        percentSatisfied={percentSatisfied}
-      />
-    </div>
+      {hasLoaded ? (
+        <div
+          style={{
+            margin: "50px",
+            textAlign: "center",
+            marginBottom: "100px",
+          }}
+        >
+          <h2>Full Transcript</h2>
+          <p style={{ textAlign: "left" }}>{resultData}</p>
+          <h2>Summarized Transcript</h2>
+          <p style={{ textAlign: "left", paddingBottom: "100px" }}>{summary}</p>
+        </div>
+      ) : null}
+      <Footer style={{ position: "bottom" }} />
+    </>
   );
 }
