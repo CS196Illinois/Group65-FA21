@@ -43,3 +43,8 @@ venv.bak/
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+
+# Test & Generated Files
+audio-chunks/
+video.mp4
+video.wav

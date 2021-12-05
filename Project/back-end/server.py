@@ -8,9 +8,9 @@ from summarizer import summarize
 app = Flask(__name__)
 cors = CORS(app)
 
-@app.route("/transcribe/<filename>")
-def transcribe(filename):
-    transcript  = transcribevideo(filename)
+@app.route("/transcribe/<file>")
+def transcribe(file):
+    transcript  = transcribevideo(file)
     print("TRANSCRIPT:",transcript)
     data = {
         "transcript": transcript,
