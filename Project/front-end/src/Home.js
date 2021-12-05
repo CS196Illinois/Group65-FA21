@@ -38,7 +38,7 @@ export default function Home() {
   }
 
   function uploadFile(event) {
-    console.log(file);
+    console.dir(file);
     if (file === null) alert("No File Chosen.");
     else {
       setIsLoading(true);
@@ -56,7 +56,13 @@ export default function Home() {
 
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          paddingTop: "100px",
+        }}
+      >
         <div style={{ paddingRight: 50, textAlign: "right" }}>
           <Title />
           <Subtitles />
@@ -78,7 +84,7 @@ export default function Home() {
           {isLoading ? (
             <>
               <div className="spinner-border text-primary" role="status" />
-              <h4>loading...</h4>
+              <h4 className="text-muted">Loading...</h4>
             </>
           ) : null}
         </div>
@@ -91,6 +97,7 @@ export default function Home() {
             textAlign: "center",
             marginBottom: "100px",
           }}
+          className="lead"
         >
           <h2>Full Transcript</h2>
           <p style={{ textAlign: "left" }}>{resultData}</p>
