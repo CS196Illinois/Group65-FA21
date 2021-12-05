@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { ReactComponent as HomeImage } from "./figure.svg";
 import { Form } from "react-bootstrap";
 
@@ -12,7 +11,7 @@ const Title = () => {
   return (
     <div style={{ paddingTop: 100 }}>
       <h1 style={titleStyle}>Lecture Videos...</h1>
-      <h1 style={{ ...titleStyle, ...{ fontStyle: "italic" } }}>Summarized.</h1>
+      <h1 style={{ ...titleStyle, fontStyle: "italic" }}>Summarized.</h1>
     </div>
   );
 };
@@ -42,39 +41,26 @@ export default function Home() {
   const wordsRemoved = 0;
   const percentSatisfied = 0;
 
-  const [file, setFile] = React.useState("");
-  const [fileContent, setFileContent] = React.useState("");
+  const [file, setFile] = React.useState(null);
+  const [resultData, setResultData] = React.useState("");
+  const [summary, setSummary] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
   function handleUpload(event) {
     setFile(event.target.files[0]);
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      setFileContent(e.target.result);
-      console.log(e.target.result);
-    };
-    reader.readAsDataURL(event.target.files[0]);
-    // localStorage.setItem()
-    // Add code here to upload file to server
   }
 
-  // function previewFile() {
-  //   const preview = document.querySelector("img");
-  //   const file = document.querySelector("input[type=file]").files[0];
-  //   const reader = new FileReader();
-
-  //   reader.addEventListener(
-  //     "load",
-  //     function () {
-  //       // convert image file to base64 string
-  //       preview.src = reader.result;
-  //     },
-  //     false
-  //   );
-
-  //   if (file) {
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
+  function uploadFile(event) {
+    setIsLoading(true);
+    event.preventDefault();
+    fetch(`http://127.0.0.1:3002/transcribe/${file.name}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setResultData(data.transcript);
+        setSummary(data.summary);
+        setIsLoading(false);
+      });
+  }
 
   return (
     <div>
@@ -82,9 +68,6 @@ export default function Home() {
         <div style={{ paddingRight: 50, textAlign: "right" }}>
           <Title />
           <Subtitles />
-          <Link to="/Result">
-            <button className="btn m-4 btn-primary btn-lg">Result Page</button>
-          </Link>
           <Form.Group controlId="formFileLg" className="mb-3">
             <Form.Control
               type="file"
@@ -92,14 +75,21 @@ export default function Home() {
               size="lg"
               onChange={handleUpload}
             />
-            <p>Filename: {file.name}</p>
-            <p>File type: {file.type}</p>
-            <p>File size: {file.size} bytes</p>
           </Form.Group>
-          <button className="btn m-4 btn-primary btn-lg">Summscribe!</button>
+          <button className="btn m-4 btn-primary btn-lg" onClick={uploadFile}>
+            Upload
+          </button>
+          {isLoading ? (
+            <>
+              <div className="spinner-border text-primary" role="status" />
+              <h4>loading...</h4>
+            </>
+          ) : null}
         </div>
         <HomeImage style={{ paddingTop: 100 }} />
       </div>
+      <p style={{ padding: "50px" }}>{resultData}</p>
+      <p style={{ padding: "50px" }}>{summary}</p>
       <Statistics
         minutesUploaded={minutesUploaded}
         wordsRemoved={wordsRemoved}
