@@ -2,15 +2,15 @@ from flask import Flask, request
 from flask_cors import CORS, cross_origin
 import json
 
-from transcribe import transcribevideo
+from transcriber import transcribe
 from summarizer import summarize
 
 app = Flask(__name__)
 cors = CORS(app)
 
-@app.route("/transcribe/<file>")
-def transcribe(file):
-    transcript  = transcribevideo(file)
+@app.route("/transcriber/<file>")
+def generate(file):
+    transcript  = transcribe(file)
     print("Transciption - Done.")
     data = {
         "transcript": transcript,

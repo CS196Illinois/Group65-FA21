@@ -7,7 +7,7 @@ from pydub.silence import split_on_silence
 
 r = sr.Recognizer()
 
-def transcribevideo(path):
+def transcribe(path):
     video = moviepy.editor.VideoFileClip(path)
     receiveaudio = video.audio
     audiofile = path[0:-4] + ".wav"
@@ -25,7 +25,7 @@ def transcribevideo(path):
         # adjust this per requirement
         silence_thresh=sound.dBFS-14,
         # keep the silence for 1 second, adjustable as well
-        keep_silence=500,
+        keep_silence=200,
         )
     folder_name = "audio-chunks"
     # create a directory to store the audio chunks

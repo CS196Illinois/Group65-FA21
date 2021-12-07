@@ -17,6 +17,25 @@ const Title = () => {
   );
 };
 
+const Result = (props) => {
+  const { transcript, summary } = props;
+  return (
+    <div
+      style={{
+        margin: "50px",
+        textAlign: "center",
+        marginBottom: "100px",
+      }}
+      className="lead"
+    >
+      <h2>Full Transcript</h2>
+      <p style={{ textAlign: "left" }}>{transcript}</p>
+      <h2>Summarized Transcript</h2>
+      <p style={{ textAlign: "left", paddingBottom: "100px" }}>{summary}</p>
+    </div>
+  );
+};
+
 const Subtitles = () => {
   return (
     <div style={{ textAlign: "right" }} className="text-muted">
@@ -28,7 +47,7 @@ const Subtitles = () => {
 
 export default function Home() {
   const [file, setFile] = React.useState(null);
-  const [resultData, setResultData] = React.useState("");
+  const [transcript, setTranscript] = React.useState("");
   const [summary, setSummary] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [hasLoaded, setHasLoaded] = React.useState(false);
@@ -43,10 +62,10 @@ export default function Home() {
     else {
       setIsLoading(true);
       event.preventDefault();
-      fetch(`http://127.0.0.1:3002/transcribe/${file.name}`)
+      fetch(`http://127.0.0.1:3002/transcriber/${file.name}`)
         .then((response) => response.json())
         .then((data) => {
-          setResultData(data.transcript);
+          setTranscript(data.transcript);
           setSummary(data.summary);
           setIsLoading(false);
           setHasLoaded(true);
@@ -90,21 +109,7 @@ export default function Home() {
         </div>
         <HomeImage style={{ paddingTop: 100 }} />
       </div>
-      {hasLoaded ? (
-        <div
-          style={{
-            margin: "50px",
-            textAlign: "center",
-            marginBottom: "100px",
-          }}
-          className="lead"
-        >
-          <h2>Full Transcript</h2>
-          <p style={{ textAlign: "left" }}>{resultData}</p>
-          <h2>Summarized Transcript</h2>
-          <p style={{ textAlign: "left", paddingBottom: "100px" }}>{summary}</p>
-        </div>
-      ) : null}
+      {hasLoaded ? <Result transcript={transcript} summary={summary} /> : null}
       <Footer style={{ position: "bottom" }} />
     </>
   );
