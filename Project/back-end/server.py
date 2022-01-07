@@ -15,6 +15,7 @@ def generate(file):
     data = {
         "transcript": transcript,
         "summary": summarize(transcript)
+        # "summary": transcript,
     }
     print("Summary - Done.")
     return json.dumps(data)
