@@ -17,10 +17,7 @@ const Footer = () => {
               Lecture Summarizer: An application that outputs a summarized
               transcript from a lecture video*
             </h5>
-            <p>
-              *English only, probably sucks of audio quality is bad, has
-              finnicky upload process, and probably not as useful output:)
-            </p>
+            <p>*English only, audio quality affects transcription accuracy.</p>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
